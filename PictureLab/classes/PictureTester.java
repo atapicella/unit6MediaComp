@@ -91,13 +91,13 @@ public class PictureTester
     temple.explore();
   }
   
-//   /** Method to test the collage method */
-//   public static void testCollage()
-//   {
-//     Picture canvas = new Picture("640x480.jpg");
-//     canvas.createCollage();
-//     canvas.explore();
-//   }
+  /** Method to test the collage method */
+  public static void testCollage()
+  {
+    Picture canvas = new Picture("640x480.jpg");
+    canvas.createCollage();
+    canvas.explore();
+  }
   
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
@@ -123,15 +123,15 @@ public class PictureTester
     temple.explore();
   }
   
-  public static void testCopy()
-  {
-    Picture source = new Picture("seagull.jpg");
-    Picture toPicture = new Picture("beach.jpg");
-    source.explore();
-    toPicture.explore();
-    toPicture.copy(source, 229, 326, 230, 353, 350, 250);
-    toPicture.explore();
-  }
+//   public static void testCopy()
+//   {
+//     Picture source = new Picture("seagull.jpg");
+//     Picture toPicture = new Picture("beach.jpg");
+//     source.explore();
+//     toPicture.explore();
+//     toPicture.copy(source, 229, 326, 230, 353, 350, 250);
+//     toPicture.explore();
+//   }
   
   public static void testScaleByHalf()
   {
@@ -173,7 +173,7 @@ public class PictureTester
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
-    //testCollage();
+    testCollage();
     //testCopy();
     //testEdgeDetection();
     //testEdgeDetection2();
