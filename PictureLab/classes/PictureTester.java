@@ -17,12 +17,44 @@ public class PictureTester
     beach.explore();
   }
   
+  public static void testKeepOnlyBlue()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore();
+    beach.zeroBlue();
+    beach.explore();
+  }
+  
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
   {
-    Picture caterpillar = new Picture("caterpillar.jpg");
+    Picture caterpillar = new Picture("snowman.jpg");
     caterpillar.explore();
     caterpillar.mirrorVertical();
+    caterpillar.explore();
+  }
+  
+   public static void testMirrorHorizontal()
+  {
+    Picture caterpillar = new Picture("caterpillar.jpg");
+    caterpillar.explore();
+    caterpillar.mirrorHorizontal();
+    caterpillar.explore();
+  }
+  
+  public static void testMirrorHorizontalBotToTop()
+  {
+    Picture caterpillar = new Picture("caterpillar.jpg");
+    caterpillar.explore();
+    caterpillar.mirrorHorizontalBotToTop();
+    caterpillar.explore();
+  }
+  
+  public static void testMirrorDiagonal()
+  {
+    Picture caterpillar = new Picture("caterpillar.jpg");
+    caterpillar.explore();
+    caterpillar.mirrorDiagonal();
     caterpillar.explore();
   }
   
@@ -34,14 +66,38 @@ public class PictureTester
     temple.mirrorTemple();
     temple.explore();
   }
-  
-  /** Method to test the collage method */
-  public static void testCollage()
+
+  public static void testMirrorArms()
   {
-    Picture canvas = new Picture("640x480.jpg");
-    canvas.createCollage();
-    canvas.explore();
+    Picture temple = new Picture("snowman.jpg");
+    temple.explore();
+    temple.mirrorArms();
+    temple.explore();
   }
+  
+  public static void testNegate()
+  {
+    Picture temple = new Picture("water.jpg");
+    temple.explore();
+    temple.negate();
+    temple.explore();
+  }
+  
+  public static void testGrayscale()
+  {
+    Picture temple = new Picture("water.jpg");
+    temple.explore();
+    temple.grayscale();
+    temple.explore();
+  }
+  
+//   /** Method to test the collage method */
+//   public static void testCollage()
+//   {
+//     Picture canvas = new Picture("640x480.jpg");
+//     canvas.createCollage();
+//     canvas.explore();
+//   }
   
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
@@ -51,6 +107,42 @@ public class PictureTester
     swan.explore();
   }
   
+   public static void testFixUnderwater()
+  {
+    Picture water = new Picture("seagull.jpg");
+    water.explore();
+    water.fixUnderwater();
+    water.explore();
+  }
+  
+  public static void testMirrorGull()
+  {
+    Picture temple = new Picture("seagull.jpg");
+    temple.explore();
+    temple.mirrorGull();
+    temple.explore();
+  }
+  
+  public static void testCopy()
+  {
+    Picture source = new Picture("seagull.jpg");
+    Picture toPicture = new Picture("beach.jpg");
+    source.explore();
+    toPicture.explore();
+    toPicture.copy(source, 229, 326, 230, 353, 350, 250);
+    toPicture.explore();
+  }
+  
+  public static void testScaleByHalf()
+  {
+    Picture source = new Picture("seagull.jpg");
+    Picture toPicture = new Picture("beach.jpg");
+    source.explore();
+    toPicture.explore();
+    toPicture.scaleByHalf(source, 30);
+    toPicture.explore();
+  }
+  
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
@@ -58,7 +150,7 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
+    //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
@@ -66,7 +158,18 @@ public class PictureTester
     //testGrayscale();
     //testFixUnderwater();
     //testMirrorVertical();
+    //testMirrorHorizontal();
+    //testMirrorHorizontalBotToTop();
+    //testMirrorDiagonal();
     //testMirrorTemple();
+    //testMirrorArms();
+    //testKeepOnlyBlue();
+    //testNegate();
+    //testGrayscale();
+    //testFixUnderwater();
+    //testMirrorGull();
+    //testCopy();
+    testScaleByHalf();
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
