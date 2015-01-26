@@ -10,11 +10,13 @@ public class Collage
 {
     public static void main(String AArgs[])
     {
+        Picture canvas = new Picture("600x800.jpg");
         Picture planet = new Picture("planet.jpg");
-        planet.mirrorDiagonal();
-        planet.mirrorHorizontalBotToTop();
+        canvas.scaleByHalf(planet, 50);
+        canvas.mirrorDiagonal();
+        canvas.mirrorHorizontalBotToTop();
         //planet.zeroBlue();
-        planet.keepOnlyBlueTopHalf();
+        canvas.keepOnlyBlueTopHalf();
         
         
         
@@ -24,7 +26,7 @@ public class Collage
         
         
         
-        planet.explore();
+        canvas.explore();
     }
 
 }

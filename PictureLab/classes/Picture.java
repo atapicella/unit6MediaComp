@@ -319,31 +319,8 @@ public class Picture extends SimplePicture
                        fromPixel = sourcePixels[fromRow][fromCol];
                        toPixel = toPixels[toRow][toCol];
                        toPixel.setColor(fromPixel.getColor());    
-                       if (scale>=67&&scale<100)
-                       {
-                           if (fromCol%3==0)
-                           {
-                               fromCol++;
-                            }
-                           // else
-                           //{
-                           //    fromCol--;
-                           //}
-                       }
                    }
-            if (scale>=67&&scale<100)
-            {
-                if (fromRow%3==0)
-                {
-                    fromRow++;
-                }
-               // else
-                //{
-                //    fromRow--;
-                //}
-            }
                }
-        
     }
             
 
@@ -408,17 +385,12 @@ public class Picture extends SimplePicture
     /** Method to create a collage of several pictures */
     public void createCollage()
     {
-        Picture flower1 = new Picture("flower1.jpg");
-        Picture flower2 = new Picture("flower2.jpg");
-        this.copy(flower1,0,0);
-        this.copy(flower2,100,0);
-        this.copy(flower1,200,0);
-        Picture flowerNoBlue = new Picture(flower2);
-        flowerNoBlue.zeroBlue();
-        this.copy(flowerNoBlue,300,0);
-        this.copy(flower1,400,0);
-        this.copy(flower2,500,0);
-        this.mirrorVertical();
+        Picture canvas = new Picture("600x800.jpg");
+        Picture planet = new Picture("planet.jpg");
+        canvas.scaleByHalf(planet , 50);
+        this.mirrorDiagonal();
+        this.mirrorHorizontalBotToTop();
+        this.keepOnlyBlueTopHalf();
         this.write("collage.jpg");
     }
 
