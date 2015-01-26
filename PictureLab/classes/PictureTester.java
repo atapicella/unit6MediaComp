@@ -139,7 +139,7 @@ public class PictureTester
     Picture toPicture = new Picture("beach.jpg");
     source.explore();
     toPicture.explore();
-    toPicture.scaleByHalf(source, 30);
+    toPicture.scaleByHalf(source);
     toPicture.explore();
   }
   

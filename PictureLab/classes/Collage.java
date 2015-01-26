@@ -8,25 +8,26 @@
  */
 public class Collage
 {
-    public static void main(String AArgs[])
+    public static void main(String Args[])
     {
-        Picture canvas = new Picture("600x800.jpg");
+        Picture canvas = new Picture(600, 800);
         Picture planet = new Picture("planet.jpg");
-        canvas.scaleByHalf(planet, 50);
+        canvas.scaleByHalf(planet);
         canvas.mirrorDiagonal();
         canvas.mirrorHorizontalBotToTop();
-        //planet.zeroBlue();
-        canvas.keepOnlyBlueTopHalf();
+        canvas.mirrorVertical();
+        Picture canvas2 = new Picture(600, 800);
+        canvas2.copy(canvas,0,600,0,800,0,0);
+        canvas2.zeroBlue();
+        //canvas.mirrorDiagonal();
+        //canvas.mirrorDiagonalRightToLeft();
+        canvas2.negate();
         
         
         
         
         
-        
-        
-        
-        
-        canvas.explore();
+        canvas2.explore();
     }
 
 }
