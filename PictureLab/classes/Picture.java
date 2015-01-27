@@ -339,17 +339,39 @@ public class Picture extends SimplePicture
              Pixel toPixel = null;
              Pixel sourcePixels[][] = sourcePicture.getPixels2D();
              Pixel toPixels[][] = this.getPixels2D();
+             boolean hitMin = false;
+             int colWidth = 1;
+             int fromCol = startSourceCol;
+             int toCol = startDestCol;
+             //int colCount = 1;
              for (int fromRow = startSourceRow, toRow = startDestRow; 
                     fromRow<=endSourceRow && toRow<toPixels.length; fromRow++, toRow++)
              {
-                 for (int fromCol = startSourceCol, toCol = startDestCol;
-                        fromCol>=minSourceCol && fromCol>=startSourceCol && toCol<toPixels[0].length; fromCol++, toCol++)
+                 for (int tempFromCol = fromCol ;fromCol>=minSourceCol &&  toCol<toPixels[0].length;
+                            tempFromCol++, toCol++)
                         {
                             fromPixel = sourcePixels[fromRow][fromCol];
                             toPixel = toPixels[toRow][toCol];
                             toPixel.setColor(fromPixel.getColor());
+                            if (fromCol<=minSourceCol)
+                            {
+                                hitMin = true;
+                                break;
+                            }
                             
                         }
+                 if (hitMin == true)
+                 {
+                     fromCol+=1;    
+                     colWidth-=2;
+                     toCol+=1;
+                    }
+                 else
+                 {
+                     fromCol-=1;
+                     colWidth+=2;
+                     toCol+=1;
+                    }
                     }
             }
             
