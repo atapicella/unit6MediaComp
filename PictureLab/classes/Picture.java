@@ -342,18 +342,20 @@ public class Picture extends SimplePicture
              boolean hitMin = false;
              int colWidth = 1;
              int fromCol = startSourceCol;
-             int toCol = startDestCol;
-             //int colCount = 1;
+             int toCol = startDestCol-1;
+             
              for (int fromRow = startSourceRow, toRow = startDestRow; 
                     fromRow<=endSourceRow && toRow<toPixels.length; fromRow++, toRow++)
              {
-                 for (int tempFromCol = fromCol ;fromCol>=minSourceCol &&  toCol<toPixels[0].length;
+                 int colCount = 0;
+                 for (int tempFromCol = fromCol, tempToCol = toCol-colWidth+1 ;fromCol>=minSourceCol &&  toCol<toPixels[0].length && colCount<=colWidth;
                             tempFromCol++, toCol++)
                         {
-                            fromPixel = sourcePixels[fromRow][fromCol];
-                            toPixel = toPixels[toRow][toCol];
+                            fromPixel = sourcePixels[fromRow][tempFromCol];
+                            toPixel = toPixels[toRow][tempToCol];
                             toPixel.setColor(fromPixel.getColor());
-                            if (fromCol<=minSourceCol)
+                            colCount++;
+                            if (tempFromCol<=minSourceCol)
                             {
                                 hitMin = true;
                                 break;
@@ -363,13 +365,13 @@ public class Picture extends SimplePicture
                  if (hitMin == true)
                  {
                      fromCol+=1;    
-                     colWidth-=2;
+                     colWidth-=1;
                      toCol+=1;
                     }
                  else
                  {
                      fromCol-=1;
-                     colWidth+=2;
+                     colWidth+=1;
                      toCol+=1;
                     }
                     }
