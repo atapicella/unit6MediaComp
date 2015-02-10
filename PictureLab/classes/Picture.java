@@ -126,14 +126,38 @@ public class Picture extends SimplePicture
     public void negate()
     {
         Pixel[][] pixels = this.getPixels2D();
-        for (Pixel[] rowArray : pixels)
+        for (int row = 0; row < pixels.length; row++)
         {
-            for (Pixel pixelObj : rowArray)
+            for (int col = 0; col < pixels[0].length; col++)
             {
-                pixelObj.setBlue(255-pixelObj.getBlue());
-                pixelObj.setRed(255-pixelObj.getRed());
-                pixelObj.setGreen(255-pixelObj.getGreen());
+                if ((row>199 && row<400)&&(col>298 && col<501))
+                {
+                    break;
+                }
+                else
+                {
+                    pixels[row][col].setBlue(255-pixels[row][col].getBlue());
+                    pixels[row][col].setRed(255-pixels[row][col].getRed());
+                    pixels[row][col].setGreen(255-pixels[row][col].getGreen());
+                }
             }
+        }
+    }
+    
+    public void negateTriangle(int startRow, int startCol, int endRow, int endCol)
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        int subtractor = 0;
+        for (int row = startRow; row < pixels.length&&row<endRow; row++)
+        {
+            for (int col = endCol-subtractor; col>=startCol; col--)
+            {
+                    pixels[row][col].setBlue(255-pixels[row][col].getBlue());
+                    pixels[row][col].setRed(255-pixels[row][col].getRed());
+                    pixels[row][col].setGreen(255-pixels[row][col].getGreen());    
+                    //pixels[row][col].setAlpha(50);    
+            }
+            subtractor++;
         }
     }
     
@@ -167,10 +191,6 @@ public class Picture extends SimplePicture
                     pixelObj.setGreen(pixelObj.getGreen()+ 10);
                     pixelObj.setRed(0);
                 }
-                    
-                //pixelObj.setBlue(avg);
-                //pixelObj.setRed(avg);
-                //pixelObj.setGreen(avg);
             }
         }
     }
@@ -331,52 +351,8 @@ public class Picture extends SimplePicture
                         }
                     }
             }
-    
-    public void copyDiamond(Picture sourcePicture, int startSourceRow, int endSourceRow,
-                int startSourceCol, int minSourceCol, int startDestRow, int startDestCol)
-         {
-             Pixel fromPixel = null;
-             Pixel toPixel = null;
-             Pixel sourcePixels[][] = sourcePicture.getPixels2D();
-             Pixel toPixels[][] = this.getPixels2D();
-             boolean hitMin = false;
-             int colWidth = 1;
-             int fromCol = startSourceCol;
-             int toCol = startDestCol-1;
-             
-             for (int fromRow = startSourceRow, toRow = startDestRow; 
-                    fromRow<=endSourceRow && toRow<toPixels.length; fromRow++, toRow++)
-             {
-                 int colCount = 0;
-                 for (int tempFromCol = fromCol, tempToCol = toCol-colWidth+1 ;fromCol>=minSourceCol &&  toCol<toPixels[0].length && colCount<=colWidth;
-                            tempFromCol++, toCol++)
-                        {
-                            fromPixel = sourcePixels[fromRow][tempFromCol];
-                            toPixel = toPixels[toRow][tempToCol];
-                            toPixel.setColor(fromPixel.getColor());
-                            colCount++;
-                            if (tempFromCol<=minSourceCol)
-                            {
-                                hitMin = true;
-                                break;
-                            }
-                            
-                        }
-                 if (hitMin == true)
-                 {
-                     fromCol+=1;    
-                     colWidth-=1;
-                     toCol+=1;
-                    }
-                 else
-                 {
-                     fromCol-=1;
-                     colWidth+=1;
-                     toCol+=1;
-                    }
-                    }
-            }
             
+          
             
     //Scale entered as percentage        
     public void scaleByHalf(Picture sourcePicture)
@@ -461,12 +437,29 @@ public class Picture extends SimplePicture
     /** Method to create a collage of several pictures */
     public void createCollage()
     {
-        Picture canvas = new Picture("600x800.jpg");
+//         Picture canvas = new Picture("600x800.jpg");
+//         Picture planet = new Picture("planet.jpg");
+//         canvas.scaleByHalf(planet);
+//         this.mirrorDiagonal();
+//         this.mirrorHorizontalBotToTop();
+//         this.zeroBlueTopHalf();
+//         this.write("collage.jpg");
+//         
+        
+        
+        Picture canvas = new Picture(600, 800);
         Picture planet = new Picture("planet.jpg");
-        canvas.scaleByHalf(planet);
+        this.scaleByHalf(planet);
         this.mirrorDiagonal();
         this.mirrorHorizontalBotToTop();
-        this.zeroBlueTopHalf();
+        this.mirrorVertical();
+        this.zeroBlue();
+        this.negate();       
+        this.negateTriangle(200,299,299,398);
+        this.mirrorVertical();
+        this.mirrorHorizontal();
+
+        this.explore();
         this.write("collage.jpg");
     }
 
@@ -501,15 +494,16 @@ public class Picture extends SimplePicture
      */
     public static void main(String[] args) 
     {
-        Picture beach = new Picture("Desert.jpg");
-        beach.explore();
-        beach.zeroBlue();
-        beach.explore();
-        beach.mirrorVertical();
-        beach.explore();
-        beach = new Picture("Desert.jpg");
-        beach.mirrorVertical();
-        beach.explore();
+        createCollage();
+//         Picture beach = new Picture("Desert.jpg");
+//         beach.explore();
+//         beach.zeroBlue();
+//         beach.explore();
+//         beach.mirrorVertical();
+//         beach.explore();
+//         beach = new Picture("Desert.jpg");
+//         beach.mirrorVertical();
+//         beach.explore();
     }
 
 } // this } is the end of class Picture, put all new methods before this
