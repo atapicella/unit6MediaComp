@@ -94,9 +94,8 @@ public class PictureTester
   /** Method to test the collage method */
   public static void testCollage()
   {
-    Picture canvas = new Picture("600x800.jpg");
+    Picture canvas = new Picture(600, 800);
     canvas.createCollage();
-    canvas.explore();
   }
   
   /** Method to test edgeDetection */

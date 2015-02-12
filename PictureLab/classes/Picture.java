@@ -494,7 +494,6 @@ public class Picture extends SimplePicture
      */
     public static void main(String[] args) 
     {
-        createCollage();
 //         Picture beach = new Picture("Desert.jpg");
 //         beach.explore();
 //         beach.zeroBlue();
